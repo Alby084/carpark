@@ -1,0 +1,12 @@
+[
+    {
+        "carpark_name": "Moondalup",
+        "carpark_spaces": 10,
+        "carpark_temp": 22.01
+    },
+    {
+        "carpark_name": "Parth",
+        "carpark_spaces": 10,
+        "carpark_temp": 19.21
+    }
+]
