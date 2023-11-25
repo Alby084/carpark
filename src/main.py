@@ -8,6 +8,7 @@ if __name__ == "__main__":
     print(random_car.get_car_details())
     print(random_car.get_car_details())
     print(random_car.get_car_details())
+    print(random_car.get_car_details())
     manager = CarParkManagementCentre()
 
     # Load car parks from the JSON file
