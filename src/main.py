@@ -3,7 +3,7 @@ from Car import *
 
 
 if __name__ == "__main__":
-    car_inventory = CarInventory()  # Assuming this is defined elsewhere
+    car_inventory = CarInventory()
     random_car = RandomCar(car_inventory)
     print(random_car.get_car_details())
     print(random_car.get_car_details())

@@ -2,11 +2,11 @@
     {
         "carpark_name": "Moondalup",
         "carpark_spaces": 10,
-        "carpark_temp": 23.36
+        "carpark_temp": 42.25
     },
     {
         "carpark_name": "Parth",
         "carpark_spaces": 10,
-        "carpark_temp": 16.52
+        "carpark_temp": 32.03
     }
 ]
