@@ -59,12 +59,12 @@ class RandomCar:
             number_plate=number_plate,
             date_enter=date_enter
         )
-        return f"[Car: {car.model} | Number plate: {car.number_plate} | Entered: {car.date_enter}]\n"
+        return f"[Car: {car.model} | Number plate: {car.number_plate} | Entered: {car.date_enter}]"
 
 
 # Example usage
 if __name__ == "__main__":
-    car_inventory = CarInventory()  # Assuming this is defined elsewhere
+    car_inventory = CarInventory()
     random_car = RandomCar(car_inventory)
     print(random_car.get_car_details())
     print(random_car.get_car_details())
