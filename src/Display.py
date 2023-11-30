@@ -18,6 +18,15 @@ class ParkingSpaceTracker:
             return True
         return False
 
+    def leave_car(self):
+        occupied_spots = [i for i, space in enumerate(self.carpark.data) if space != "Empty"]
+        if occupied_spots:
+            spot_to_leave = random.choice(occupied_spots)
+            leaving_car = self.carpark.data[spot_to_leave]
+            self.carpark.data[spot_to_leave] = "Empty"
+            return leaving_car
+        return None
+
     def display_parking_spaces(self):
         for i, space in enumerate(self.carpark.data):
             status = space if space != "Empty" else "Empty"
@@ -26,6 +35,7 @@ class ParkingSpaceTracker:
 
 class CarManager:
     def __init__(self, file_path):
+        self.file_path = file_path
         with open(file_path, 'r') as file:
             self.car_data = json.load(file)
 
@@ -34,6 +44,25 @@ class CarManager:
 
     def choose_random_car(self, available_cars):
         return random.choice(available_cars) if available_cars else "No cars available"
+
+    def remove_car(self, car):
+        if car in self.car_data:
+            self.car_data.remove(car)
+            with open(self.file_path, 'w') as file:
+                json.dump(self.car_data, file, indent=4)
+
+    def log_exit_car(self, car):
+        exit_cars_file_path = "../data/exit_cars.json"  # Update this path as needed
+        try:
+            with open(exit_cars_file_path, 'r') as file:
+                exit_cars = json.load(file)
+        except FileNotFoundError:
+            exit_cars = []
+
+        exit_cars.append(car)
+
+        with open(exit_cars_file_path, 'w') as file:
+            json.dump(exit_cars, file, indent=4)
 
 
 class Display:
@@ -56,11 +85,19 @@ class Display:
 
         print(f"\n{self.randomcar}")
 
+    def car_leaves(self):
+        leaving_car = self.tracker.leave_car()
+        if leaving_car:
+            self.car_manager.remove_car(leaving_car)
+            self.car_manager.log_exit_car(leaving_car)
+            print(f"Car {leaving_car} has left the parking and is logged in exit_cars.json.")
+        else:
+            print("No cars to leave.")
+
 
 if __name__ == "__main__":
     car_manager = CarManager("../data/current_cars.json")
 
-    # Create CarParkManagementCentre instance
     carpark_manager = CarParkManagementCentre()
 
     # Read car park data from carpark.json and add carparks to manager
@@ -74,3 +111,8 @@ if __name__ == "__main__":
 
     # Create Display instance with selected carpark
     display_instance = Display(selected_carpark, car_manager)
+
+    # Car leave
+    display_instance.car_leaves()
+
+    Display(selected_carpark, car_manager)
