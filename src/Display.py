@@ -54,6 +54,8 @@ class Display:
         print("\nCurrent Parking Spaces Status:")
         self.tracker.display_parking_spaces()
 
+        print(f"\n{self.randomcar}")
+
 
 if __name__ == "__main__":
     car_manager = CarManager("../data/current_cars.json")
