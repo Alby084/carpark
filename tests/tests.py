@@ -1,7 +1,7 @@
 import unittest
 from datetime import datetime
 from src.Car import NumberPlatePicker, DateGenerator  # Replace 'your_module' with the actual name of your module
-
+from src.CarparkManagementCenter import CarParkManagementCenter
 
 class Unittests(unittest.TestCase):
 
@@ -27,6 +27,15 @@ class Unittests(unittest.TestCase):
         # Suggested by chatgpt
         self.assertTrue(abs(datetime.strptime(generated_date, "%d/%m/%Y %I:%M%p") - datetime.strptime(expected_date,
                                                                                                       "%d/%m/%Y %I:%M%p")).seconds < 5)
+
+    def test_add_carpark(self):
+        manager = CarParkManagementCenter()
+        manager.add_carpark("Test", 11, 11.1)
+
+        self.assertEqual(len(manager.car_parks), 1)
+        self.assertEqual(manager.car_parks[0].carpark_name, "Test")
+        self.assertEqual(manager.car_parks[0].carpark_spaces, 11)
+        self.assertEqual(manager.car_parks[0].carpark_temp, 11.1)
 
 
 if __name__ == '__main__':
