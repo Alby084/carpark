@@ -52,7 +52,7 @@ class CarManager:
                 json.dump(self.car_data, file, indent=4)
 
     def log_exit_car(self, car):
-        exit_cars_file_path = "../data/exit_cars.json"  # Update this path as needed
+        exit_cars_file_path = "../data/exit_cars.json"
         try:
             with open(exit_cars_file_path, 'r') as file:
                 exit_cars = json.load(file)
@@ -69,7 +69,6 @@ class Display:
     def __init__(self, carpark, car_manager):
         self.tracker = ParkingSpaceTracker(carpark)
         self.car_manager = car_manager
-        # self.update_display()
 
     def update_display(self):
         available_cars = self.car_manager.get_available_cars(self.tracker.carpark.data)
