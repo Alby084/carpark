@@ -39,7 +39,6 @@ def wait():
 
 
 if __name__ == "__main__":
-    car_manager = CarManager("../data/current_cars.json")
 
     carpark_manager = CarParkManagementCenter()
 
@@ -75,6 +74,7 @@ if __name__ == "__main__":
     carenter()
     wait()
     carenter()
+    car_manager = CarManager("../data/current_cars.json")
     wait()
     Display(selected_carpark, car_manager).update_display()
     Display(selected_carpark, car_manager)
@@ -90,6 +90,7 @@ if __name__ == "__main__":
     carexit()
     wait()
     carenter()
+    car_manager = CarManager("../data/current_cars.json")
     wait()
     Display(selected_carpark, car_manager).update_display()
     Display(selected_carpark, car_manager)
@@ -103,6 +104,7 @@ if __name__ == "__main__":
     carenter()
     wait()
     carenter()
+    car_manager = CarManager("../data/current_cars.json")
 
     while repeat:
         status = randomselector()
@@ -119,6 +121,7 @@ if __name__ == "__main__":
             case 3:
                 wait()
                 carenter()
+                car_manager = CarManager("../data/current_cars.json")
             case 4:
                 wait()
                 carexit()
