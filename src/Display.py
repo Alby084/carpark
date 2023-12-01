@@ -77,20 +77,22 @@ class Display:
         if self.randomcar != "Empty":
             parked = self.tracker.park_car(self.randomcar)
             if not parked:
-                print("No empty spots available, car left")
+                self.car_manager.remove_car(self.randomcar)
+                self.car_manager.log_exit_car(self.randomcar)
+                return print(f"\nFULL {self.randomcar} EXIT")
 
         # Display current parking space status
         print("\nCurrent Parking Spaces Status:")
         self.tracker.display_parking_spaces()
 
-        print(f"\n{self.randomcar}")
+        print(f"\nPARKED {self.randomcar}")
 
     def car_leaves(self):
         leaving_car = self.tracker.leave_car()
         if leaving_car:
             self.car_manager.remove_car(leaving_car)
             self.car_manager.log_exit_car(leaving_car)
-            print(f"Car {leaving_car} has left the parking and is logged in exit_cars.json.")
+            print(f"UNPARKED {leaving_car}")
         else:
             print("No cars to leave.")
 
@@ -109,10 +111,10 @@ if __name__ == "__main__":
     # Select carpark
     selected_carpark = carpark_manager.car_parks[0]
 
-    # Create Display instance with selected carpark
-    display_instance = Display(selected_carpark, car_manager)
+    # Display
+    Display(selected_carpark, car_manager)
+    Display(selected_carpark, car_manager)
+    Display(selected_carpark, car_manager)
 
     # Car leave
-    display_instance.car_leaves()
-
-    Display(selected_carpark, car_manager)
+    # Display(selected_carpark, car_manager).car_leaves()

@@ -1,7 +1,8 @@
 from CarparkManagementCenter import CarParkManagementCenter
-from Car import RandomCar
-from Car_list import CarInventory
 from Sensors import EnterSensor, ExitSensor
+from Display import CarManager, Display
+import random
+import json
 
 
 def carenter():
@@ -28,5 +29,28 @@ def printcarparks():
     manager.list_carparks()
 
 
+def randomselector(number):
+    number = random.randint(0, 2)
+
+
 if __name__ == "__main__":
-    printcarparks()
+    car_manager = CarManager("../data/current_cars.json")
+
+    carpark_manager = CarParkManagementCenter()
+
+    # Read car park data from carpark.json and add carparks to manager
+    with open("../data/carpark.json", "r") as file:
+        carpark_data = json.load(file)
+        for carpark in carpark_data:
+            carpark_manager.add_carpark(carpark["carpark_name"], carpark["carpark_spaces"], carpark["carpark_temp"])
+
+    # Select carpark
+    selected_carpark = carpark_manager.car_parks[0]
+
+    # Display
+    Display(selected_carpark, car_manager)
+    Display(selected_carpark, car_manager)
+    Display(selected_carpark, car_manager)
+
+    # Car leave
+    # Display(selected_carpark, car_manager).car_leaves()
