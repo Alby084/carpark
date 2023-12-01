@@ -1,22 +1,32 @@
-from CarparkManagementCenter import *
-from Car import *
+from CarparkManagementCenter import CarParkManagementCenter
+from Car import RandomCar
+from Car_list import CarInventory
+from Sensors import EnterSensor, ExitSensor
 
 
-if __name__ == "__main__":
-    car_inventory = CarInventory()
-    random_car = RandomCar(car_inventory)
-    print(random_car.get_car_details())
-    print(random_car.get_car_details())
-    print(random_car.get_car_details())
-    print(random_car.get_car_details())
-    manager = CarParkManagementCentre()
+def carenter():
+    enter_sensor = EnterSensor("../data/current_cars.json")
+    print(enter_sensor.process_car())
 
-    # Load car parks from the JSON file
+
+def carexit():
+    exit_sensor = ExitSensor("../data/exit_cars.json", "../data/current_cars.json")
+    print(exit_sensor.process_car())
+
+
+def printcarparks():
+    manager = CarParkManagementCenter()
+
+    # Load carparks from JSON file
     try:
         manager.load_from_file("../data/carpark.json")
-        print("Carpark data loaded successfully.")
+        print("Carparks:")
     except Exception as e:
         print(f"An error occurred while loading the file: {e}")
 
-    # Now list all carparks
+    # list all loaded carparks
     manager.list_carparks()
+
+
+if __name__ == "__main__":
+    printcarparks()

@@ -70,12 +70,11 @@ class ExitSensor(Sensor):
 
 
 if __name__ == "__main__":
-    # Example Usage
     enter_sensor = EnterSensor("../data/current_cars.json")
     exit_sensor = ExitSensor("../data/exit_cars.json", "../data/current_cars.json")
 
-    # Process a car entering
+    # car enter
     print(enter_sensor.process_car())
 
-    # Process a car exiting
+    # car exit
     print(exit_sensor.process_car())

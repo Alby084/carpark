@@ -1,6 +1,7 @@
 import random
 import json
 
+
 class CarPark:
     def __init__(self, carpark_name: str, carpark_spaces: int, carpark_temp: float = None):
         self.carpark_name = carpark_name
@@ -12,7 +13,7 @@ class CarPark:
         return f"Name: {self.carpark_name} | Spaces: {self.carpark_spaces} | Temperature: {self.carpark_temp}°C"
 
 
-class CarParkManagementCentre:
+class CarParkManagementCenter:
     def __init__(self):
         self.car_parks = []
 
@@ -43,13 +44,13 @@ class CarParkManagementCentre:
 
 
 if __name__ == "__main__":
-    manager = CarParkManagementCentre()
+    manager = CarParkManagementCenter()
 
-    # Add a sample carpark with a random temperature
-    manager.add_carpark("Moondalup", 10)
-    manager.add_carpark("Parth", 10)
+    # Add carpark with random temperature
+    manager.add_carpark("Moondalup Large", 50)
+    manager.add_carpark("Moondalup Small", 10)
 
-    # Optionally, save the current state to a file
+    # save the current state of the list to file
     try:
         manager.save_to_file("../data/carpark.json")
         print("Carpark data saved successfully.")

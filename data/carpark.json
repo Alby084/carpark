@@ -1,12 +1,12 @@
 [
     {
-        "carpark_name": "Moondalup",
-        "carpark_spaces": 10,
-        "carpark_temp": 42.25
+        "carpark_name": "Moondalup Large",
+        "carpark_spaces": 50,
+        "carpark_temp": 20.96
     },
     {
-        "carpark_name": "Parth",
+        "carpark_name": "Moondalup Small",
         "carpark_spaces": 10,
-        "carpark_temp": 32.03
+        "carpark_temp": 25.58
     }
 ]

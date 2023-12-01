@@ -1,6 +1,6 @@
 import random
 import json
-from CarparkManagementCenter import CarParkManagementCentre
+from CarparkManagementCenter import CarParkManagementCenter
 
 
 class ParkingSpaceTracker:
@@ -98,7 +98,7 @@ class Display:
 if __name__ == "__main__":
     car_manager = CarManager("../data/current_cars.json")
 
-    carpark_manager = CarParkManagementCentre()
+    carpark_manager = CarParkManagementCenter()
 
     # Read car park data from carpark.json and add carparks to manager
     with open("../data/carpark.json", "r") as file:
