@@ -3,7 +3,7 @@ import string
 from datetime import datetime
 
 # Assuming CarInventory is defined elsewhere
-from Car_list import CarInventory
+from src.Car_list import CarInventory  # had to add src. in front of car_list to stop unittest giving error
 
 
 class ModelPicker:

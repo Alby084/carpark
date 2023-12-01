@@ -43,7 +43,7 @@ class CarManager:
         return [car for car in self.car_data if car not in parked_cars]
 
     def choose_random_car(self, available_cars):
-        return random.choice(available_cars) if available_cars else "No cars available"
+        return random.choice(available_cars) if available_cars else "Empty"
 
     def remove_car(self, car):
         if car in self.car_data:
@@ -69,7 +69,7 @@ class Display:
     def __init__(self, carpark, car_manager):
         self.tracker = ParkingSpaceTracker(carpark)
         self.car_manager = car_manager
-        self.update_display()
+        # self.update_display()
 
     def update_display(self):
         available_cars = self.car_manager.get_available_cars(self.tracker.carpark.data)
@@ -92,9 +92,9 @@ class Display:
         if leaving_car:
             self.car_manager.remove_car(leaving_car)
             self.car_manager.log_exit_car(leaving_car)
-            print(f"UNPARKED {leaving_car}")
+            return print(f"UNPARKED {leaving_car}")
         else:
-            print("No cars to leave.")
+            print("NO PARKED CARS")
 
 
 if __name__ == "__main__":
@@ -108,13 +108,14 @@ if __name__ == "__main__":
         for carpark in carpark_data:
             carpark_manager.add_carpark(carpark["carpark_name"], carpark["carpark_spaces"], carpark["carpark_temp"])
 
+    carpark_manager.list_carparks()
+
     # Select carpark
     selected_carpark = carpark_manager.car_parks[0]
 
     # Display
-    Display(selected_carpark, car_manager)
-    Display(selected_carpark, car_manager)
-    Display(selected_carpark, car_manager)
+    # Display(selected_carpark, car_manager)
+    # Display(selected_carpark, car_manager).update_display()
 
     # Car leave
     # Display(selected_carpark, car_manager).car_leaves()

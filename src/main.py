@@ -1,6 +1,7 @@
 from CarparkManagementCenter import CarParkManagementCenter
 from Sensors import EnterSensor, ExitSensor
 from Display import CarManager, Display
+from time import sleep
 import random
 import json
 
@@ -29,8 +30,12 @@ def printcarparks():
     manager.list_carparks()
 
 
-def randomselector(number):
-    number = random.randint(0, 2)
+def randomselector():
+    return random.randint(0, 4)
+
+
+def wait():
+    return sleep(random.randint(5, 10))
 
 
 if __name__ == "__main__":
@@ -44,13 +49,76 @@ if __name__ == "__main__":
         for carpark in carpark_data:
             carpark_manager.add_carpark(carpark["carpark_name"], carpark["carpark_spaces"], carpark["carpark_temp"])
 
-    # Select carpark
-    selected_carpark = carpark_manager.car_parks[0]
+    carpark_manager.list_carparks()
+    repeat2 = True
 
-    # Display
-    Display(selected_carpark, car_manager)
-    Display(selected_carpark, car_manager)
-    Display(selected_carpark, car_manager)
+    while repeat2:
+        try:
+            carpark = int(input("select carpark as number: "))
+        except ValueError:
+            print("Error input must be a number.")
+            continue
+        if carpark > 2 or carpark <= 0:
+            print("Error input must be a valid number")
+        else:
+            repeat2 = False
+
+    # Select carpark
+    selected_carpark = carpark_manager.car_parks[carpark - 1]
 
     # Car leave
     # Display(selected_carpark, car_manager).car_leaves()
+
+    repeat = True
+    carenter()
+    wait()
+    carenter()
+    wait()
+    carenter()
+    wait()
+    Display(selected_carpark, car_manager).update_display()
+    Display(selected_carpark, car_manager)
+    wait()
+    Display(selected_carpark, car_manager).update_display()
+    Display(selected_carpark, car_manager)
+    wait()
+    Display(selected_carpark, car_manager).update_display()
+    Display(selected_carpark, car_manager)
+    wait()
+    Display(selected_carpark, car_manager).car_leaves()
+    sleep(2)
+    carexit()
+    wait()
+    carenter()
+    wait()
+    Display(selected_carpark, car_manager).update_display()
+    Display(selected_carpark, car_manager)
+    wait()
+    Display(selected_carpark, car_manager).car_leaves()
+    sleep(2)
+    carexit()
+    wait()
+    carenter()
+    wait()
+    carenter()
+    wait()
+    carenter()
+
+    while repeat:
+        status = randomselector()
+        match status:
+            case 1:
+                # Display
+                wait()
+                Display(selected_carpark, car_manager).update_display()
+                Display(selected_carpark, car_manager)
+            case 2:
+                # Car leave
+                wait()
+                Display(selected_carpark, car_manager).car_leaves()
+            case 3:
+                wait()
+                carenter()
+            case 4:
+                wait()
+                carexit()

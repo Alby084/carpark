@@ -28,6 +28,10 @@ class Sensor(ABC):
         with open(self.file_path, 'w') as file:
             json.dump(data, file, indent=4)
 
+    def txt_log(self, data):
+        with open('../data/history.txt', 'a') as file:
+            file.write(f"{data}\n")
+
 
 class EnterSensor(Sensor):
     def __init__(self, file_path):
@@ -40,7 +44,9 @@ class EnterSensor(Sensor):
         cars = self.json_read()
         cars.append(selected_car)
         self.json_write(cars)
-        return f"ENTER | {selected_car}"
+        enter_car_string = f"ENTER | {selected_car}"
+        self.txt_log(enter_car_string)
+        return enter_car_string
 
 
 class ExitSensor(Sensor):
@@ -55,7 +61,7 @@ class ExitSensor(Sensor):
 
         left_car = random.choice(current_cars)
         exit_time = datetime.now().strftime("%d/%m/%Y %I:%M%p")
-        left_car_string = f"{left_car} | EXIT AT {exit_time}"
+        left_car_string = f"EXIT | {left_car} | LEFT AT {exit_time}"
 
         # Update current cars
         updated_cars = [car for car in current_cars if car != left_car]
@@ -66,6 +72,7 @@ class ExitSensor(Sensor):
         exit_cars.append(left_car)
         exit_cars.remove(left_car)
         self.json_write(exit_cars)
+        self.txt_log(left_car_string)
         return left_car_string
 
 
@@ -74,7 +81,7 @@ if __name__ == "__main__":
     exit_sensor = ExitSensor("../data/exit_cars.json", "../data/current_cars.json")
 
     # car enter
-    print(enter_sensor.process_car())
+    # print(enter_sensor.process_car())
 
     # car exit
     print(exit_sensor.process_car())
